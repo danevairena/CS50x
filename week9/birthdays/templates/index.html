@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                 <form action="/" method="post">
+                    <div class="form-row">
+                        <h3 id="freeresp">Name:</h3>
+                        <input id="in" name="name" autocomplete="off" type="text" required>
+                    </div>
+                    <div class="form-row">
+                        <h3 id="freeresp">Day:</h3>
+                        <select class="in" name="day" required>
+                            <option value="" disabled selected>Select day</option>
+                            {% for d in range(1, 32) %}
+                                <option value="{{ d }}">{{ d }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <h3 id="freeresp">Month:</h3>
+                        <select class="in" name="month" required>
+                            <option value="" disabled selected>Select month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit">Add Birthday</button>
+                 </form>
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                         {% for b in birthdays %}
+                            <tr>
+                                <td>{{ b["name"] }}</td>
+                                <td>{{ b["month"] }}/{{ b["day"] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
