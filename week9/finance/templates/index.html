@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <h2>Portfolio</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in holdings %}
+            <tr>
+                <td>{{ h.symbol }}</td>
+                <td>{{ h.shares }}</td>
+                <td>{{ h.price | usd }}</td>
+                <td>{{ h.total | usd }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Cash:</strong> {{ cash | usd }}</p>
+    <p><strong>Grand Total:</strong> {{ grand_total | usd }}</p>
+{% endblock %}
