@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">Profile</h2>
+
+    <div class="mb-4">
+        <p><strong>Username:</strong> {{ username }}</p>
+        <p><strong>Cash:</strong> {{ cash | usd }}</p>
+    </div>
+
+    <h4>Last 5 Transactions</h4>
+
+    {% if transactions %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Date / Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in transactions %}
+                <tr>
+                    <td>
+                        {% if t.shares > 0 %}
+                            BUY
+                        {% else %}
+                            SELL
+                        {% endif %}
+                    </td>
+                    <td>{{ t.symbol }}</td>
+                    <td>{{ t.shares | abs }}</td>
+                    <td>{{ t.price | usd }}</td>
+                    <td>{{ t.transacted }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No transactions yet.</p>
+    {% endif %}
+{% endblock %}
